@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>五円記帳 — Privacy Policy</title>
+  <title>Goen — Privacy Policy</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -11,364 +11,606 @@
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans CJK SC", "Noto Sans CJK TC", sans-serif;
       background: #fdf5f0;
       color: #3b2a1a;
-      padding: 48px 24px 80px;
     }
 
-    .container {
-      max-width: 640px;
+    /* ── Header ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fdf5f0;
+      border-bottom: 1px solid #e8d5c8;
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #3b2a1a;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    /* ── Globe language picker ── */
+    .lang-picker {
+      position: relative;
+    }
+
+    .lang-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: #3b2a1a;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.12s;
+      user-select: none;
+    }
+
+    .lang-trigger:hover { background: #f0e0d4; }
+
+    .lang-trigger svg { flex-shrink: 0; }
+
+    .lang-chevron {
+      transition: transform 0.18s;
+    }
+
+    .lang-picker.open .lang-chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #fff;
+      border: 1px solid #e8d5c8;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(59,42,26,0.10);
+      overflow: hidden;
+      min-width: 160px;
+    }
+
+    .lang-picker.open .lang-dropdown { display: block; }
+
+    .lang-option {
+      display: block;
+      width: 100%;
+      padding: 11px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      color: #3b2a1a;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .lang-option:hover { background: #fdf5f0; }
+
+    .lang-option.active {
+      font-weight: 600;
+      color: #a0622a;
+    }
+
+    /* ── Page hero ── */
+    .page-hero {
+      border-bottom: 1px solid #e8d5c8;
+      padding: 56px 32px 48px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    /* Language switcher */
-    .lang-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-
-    .lang-btn {
-      font-family: inherit;
-      font-size: 13px;
-      padding: 5px 14px;
-      border-radius: 999px;
-      border: 1.5px solid #c8a898;
-      background: transparent;
-      color: #7a5a48;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .lang-btn.active {
-      background: #3b2a1a;
-      color: #fdf5f0;
-      border-color: #3b2a1a;
-    }
-
-    /* Header */
-    .app-name {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      color: #a08070;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .updated {
-      font-size: 13px;
-      color: #a08070;
-      margin-bottom: 40px;
-    }
-
-    /* Sections */
-    .section {
-      margin-bottom: 32px;
-    }
-
-    h2 {
-      font-size: 11px;
+    .page-hero .eyebrow {
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #a08070;
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #3b2a1a;
+      margin-bottom: 12px;
+    }
+
+    .page-hero .updated {
+      font-size: 14px;
+      color: #a08070;
+    }
+
+    /* ── Content ── */
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 32px 100px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 48px;
+    }
+
+    @media (max-width: 640px) {
+      .page-hero { padding: 40px 20px 36px; }
+      .page-hero h1 { font-size: 28px; }
+      .page-content { grid-template-columns: 1fr; padding: 32px 20px 80px; }
+      .section-label { display: none; }
+      .site-header { padding: 0 20px; }
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c0a090;
+      padding-top: 4px;
+      position: sticky;
+      top: 76px;
+      align-self: start;
+    }
+
+    .section-body { }
+
+    .policy-section {
+      padding: 32px 0;
+      border-bottom: 1px solid #e8d5c8;
+    }
+
+    .policy-section:first-child { padding-top: 0; }
+    .policy-section:last-child { border-bottom: none; }
+
+    .policy-section h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #3b2a1a;
       margin-bottom: 10px;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     p, li {
       font-size: 15px;
       line-height: 1.75;
-      color: #4a3728;
+      color: #5a4030;
     }
 
-    ul {
-      padding-left: 20px;
-      margin-top: 6px;
-    }
+    ul { padding-left: 20px; margin-top: 8px; }
+    li { margin-bottom: 6px; }
+    a { color: #3b2a1a; text-underline-offset: 3px; }
 
-    li { margin-bottom: 4px; }
-
-    a { color: #3b2a1a; }
-
-    .divider {
-      border: none;
+    /* ── Footer ── */
+    .site-footer {
       border-top: 1px solid #e8d5c8;
-      margin: 32px 0;
-    }
-
-    footer {
-      font-size: 12px;
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 13px;
       color: #c0a090;
-      margin-top: 48px;
     }
 
-    /* Hidden sections */
+    /* ── Lang visibility ── */
     [data-lang] { display: none; }
-    [data-lang].visible { display: block; }
+    [data-lang].visible { display: contents; }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- Language switcher -->
-    <div class="lang-bar">
-      <button class="lang-btn" data-target="en" onclick="setLang('en')">English</button>
-      <button class="lang-btn" data-target="ja" onclick="setLang('ja')">日本語</button>
-      <button class="lang-btn" data-target="zh-Hans" onclick="setLang('zh-Hans')">简体中文</button>
-      <button class="lang-btn" data-target="zh-Hant" onclick="setLang('zh-Hant')">繁體中文</button>
+  <!-- Header -->
+  <header class="site-header">
+    <a class="site-logo" href="#">Goen</a>
+
+    <div class="lang-picker" id="langPicker">
+      <button class="lang-trigger" id="langTrigger" onclick="togglePicker(event)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="6.5" stroke="#3b2a1a" stroke-width="1.2"/>
+          <ellipse cx="8" cy="8" rx="2.6" ry="6.5" stroke="#3b2a1a" stroke-width="1.2"/>
+          <line x1="1.5" y1="6" x2="14.5" y2="6" stroke="#3b2a1a" stroke-width="1.2"/>
+          <line x1="1.5" y1="10" x2="14.5" y2="10" stroke="#3b2a1a" stroke-width="1.2"/>
+        </svg>
+        <span id="langLabel">EN</span>
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 4.5L6 8L9.5 4.5" stroke="#3b2a1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-option" data-lang-code="en" onclick="setLang('en')">English</button>
+        <button class="lang-option" data-lang-code="ja" onclick="setLang('ja')">日本語</button>
+        <button class="lang-option" data-lang-code="zh-Hans" onclick="setLang('zh-Hans')">简体中文</button>
+        <button class="lang-option" data-lang-code="zh-Hant" onclick="setLang('zh-Hant')">繁體中文</button>
+      </div>
     </div>
+  </header>
 
-    <!-- English -->
-    <div data-lang="en">
-      <p class="app-name">五円記帳</p>
+  <!-- Hero -->
+  <div class="page-hero">
+    <div data-lang="en" class="visible">
+      <p class="eyebrow">Goen</p>
       <h1>Privacy Policy</h1>
       <p class="updated">Last updated: June 16, 2026</p>
+    </div>
+    <div data-lang="ja">
+      <p class="eyebrow">五円記帳</p>
+      <h1>プライバシーポリシー</h1>
+      <p class="updated">最終更新：2026年6月16日</p>
+    </div>
+    <div data-lang="zh-Hans">
+      <p class="eyebrow">五円記帳</p>
+      <h1>隐私政策</h1>
+      <p class="updated">最后更新：2026年6月16日</p>
+    </div>
+    <div data-lang="zh-Hant">
+      <p class="eyebrow">五円記帳</p>
+      <h1>隱私權政策</h1>
+      <p class="updated">最後更新：2026年6月16日</p>
+    </div>
+  </div>
 
-      <div class="section">
-        <h2>Overview</h2>
-        <p>五円記帳 is a personal finance app for iOS. All data you enter is stored locally on your device. We do not collect, transmit, or have access to any of your personal or financial information.</p>
+  <!-- Content -->
+  <main class="page-content">
+
+    <!-- English -->
+    <div data-lang="en" class="visible" style="display:contents">
+      <div class="section-label">Overview</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Overview</h2>
+          <p>Goen is a personal finance app for iOS. All data you enter is stored locally on your device. We do not collect, transmit, or have access to any of your personal or financial information.</p>
+        </div>
       </div>
 
-      <hr class="divider" />
-
-      <div class="section">
-        <h2>Data We Collect</h2>
-        <p>We collect no data. Specifically:</p>
-        <ul>
-          <li>Transaction records (titles, amounts, dates, descriptions) are stored only on your device using Apple's SwiftData framework.</li>
-          <li>No data is sent to any server.</li>
-          <li>No analytics, crash reporting, or advertising SDKs are included.</li>
-          <li>No account or login is required.</li>
-        </ul>
+      <div class="section-label">Data</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Data We Collect</h2>
+          <p>We collect no data. Specifically:</p>
+          <ul>
+            <li>Transaction records (titles, amounts, dates, descriptions) are stored only on your device using Apple's SwiftData framework.</li>
+            <li>No data is sent to any server.</li>
+            <li>No analytics, crash reporting, or advertising SDKs are included.</li>
+            <li>No account or login is required.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Face ID &amp; Biometric Authentication</h2>
-        <p>If you enable app lock, 五円記帳 uses Face ID or Touch ID via Apple's LocalAuthentication framework. Biometric data never leaves your device and is never accessible to us.</p>
+      <div class="section-label">Security</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Face ID &amp; Biometric Authentication</h2>
+          <p>If you enable app lock, Goen uses Face ID or Touch ID via Apple's LocalAuthentication framework. Biometric data never leaves your device and is never accessible to us.</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Third-Party Services</h2>
-        <p>五円記帳 does not integrate any third-party SDKs, analytics services, advertising networks, or cloud storage providers.</p>
+      <div class="section-label">Third Parties</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Third-Party Services</h2>
+          <p>Goen does not integrate any third-party SDKs, analytics services, advertising networks, or cloud storage providers.</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Data Deletion</h2>
-        <p>All data is stored on your device. To delete it, uninstall the app. No action on our end is required or possible.</p>
+      <div class="section-label">Deletion</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Data Deletion</h2>
+          <p>All data is stored on your device. To delete it, uninstall the app. No action on our end is required or possible.</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Children's Privacy</h2>
-        <p>五円記帳 does not collect any personal information from anyone, including children under 13.</p>
+      <div class="section-label">Children</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Children's Privacy</h2>
+          <p>Goen does not collect any personal information from anyone, including children under 13.</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Changes to This Policy</h2>
-        <p>If this policy changes, the updated version will be posted at this URL with a revised date at the top.</p>
+      <div class="section-label">Changes</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Changes to This Policy</h2>
+          <p>If this policy changes, the updated version will be posted at this URL with a revised date at the top.</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Contact</h2>
-        <p>Questions? Email us at <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>.</p>
+      <div class="section-label">Contact</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Contact</h2>
+          <p>Questions? Email us at <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>.</p>
+        </div>
       </div>
-
-      <footer>© 2026 Goen. All Rights Reserved.</footer>
     </div>
 
     <!-- Japanese -->
-    <div data-lang="ja">
-      <p class="app-name">五円記帳</p>
-      <h1>プライバシーポリシー</h1>
-      <p class="updated">最終更新：2026年6月16日</p>
-
-      <div class="section">
-        <h2>概要</h2>
-        <p>五円記帳はiOS向けの家計管理アプリです。入力したすべてのデータはお使いのデバイス内にのみ保存されます。お客様の個人情報や財務情報を収集・送信・閲覧することは一切ありません。</p>
+    <div data-lang="ja" style="display:contents">
+      <div class="section-label">概要</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>概要</h2>
+          <p>五円記帳はiOS向けの家計管理アプリです。入力したすべてのデータはお使いのデバイス内にのみ保存されます。お客様の個人情報や財務情報を収集・送信・閲覧することは一切ありません。</p>
+        </div>
       </div>
 
-      <hr class="divider" />
-
-      <div class="section">
-        <h2>収集するデータ</h2>
-        <p>データは一切収集しません。具体的には以下のとおりです：</p>
-        <ul>
-          <li>取引記録（タイトル・金額・日付・備考）は、AppleのSwiftDataフレームワークを使用してデバイス上にのみ保存されます。</li>
-          <li>いかなるサーバーへもデータは送信されません。</li>
-          <li>アナリティクス・クラッシュレポート・広告SDKは一切含まれません。</li>
-          <li>アカウント登録やログインは不要です。</li>
-        </ul>
+      <div class="section-label">データ</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>収集するデータ</h2>
+          <p>データは一切収集しません。具体的には以下のとおりです：</p>
+          <ul>
+            <li>取引記録（タイトル・金額・日付・備考）は、AppleのSwiftDataフレームワークを使用してデバイス上にのみ保存されます。</li>
+            <li>いかなるサーバーへもデータは送信されません。</li>
+            <li>アナリティクス・クラッシュレポート・広告SDKは一切含まれません。</li>
+            <li>アカウント登録やログインは不要です。</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Face ID・生体認証</h2>
-        <p>アプリロックを有効にした場合、五円記帳はAppleのLocalAuthenticationフレームワークを通じてFace IDまたはTouch IDを使用します。生体情報がデバイス外に送信されることはなく、当方がアクセスすることも一切ありません。</p>
+      <div class="section-label">セキュリティ</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Face ID・生体認証</h2>
+          <p>アプリロックを有効にした場合、五円記帳はAppleのLocalAuthenticationフレームワークを通じてFace IDまたはTouch IDを使用します。生体情報がデバイス外に送信されることはなく、当方がアクセスすることも一切ありません。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>サードパーティサービス</h2>
-        <p>五円記帳は、サードパーティSDK・アナリティクスサービス・広告ネットワーク・クラウドストレージを一切使用しておりません。</p>
+      <div class="section-label">第三者</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>サードパーティサービス</h2>
+          <p>五円記帳は、サードパーティSDK・アナリティクスサービス・広告ネットワーク・クラウドストレージを一切使用しておりません。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>データの削除</h2>
-        <p>すべてのデータはお使いのデバイスに保存されています。削除するにはアプリをアンインストールしてください。当方側での操作は不要であり、また不可能です。</p>
+      <div class="section-label">削除</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>データの削除</h2>
+          <p>すべてのデータはお使いのデバイスに保存されています。削除するにはアプリをアンインストールしてください。当方側での操作は不要であり、また不可能です。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>お子様のプライバシー</h2>
-        <p>五円記帳は、13歳未満のお子様を含むすべてのユーザーの個人情報を収集しません。</p>
+      <div class="section-label">お子様</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>お子様のプライバシー</h2>
+          <p>五円記帳は、13歳未満のお子様を含むすべてのユーザーの個人情報を収集しません。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>ポリシーの変更</h2>
-        <p>本ポリシーに変更が生じた場合、冒頭の日付を更新したうえで同URLに掲載いたします。</p>
+      <div class="section-label">変更</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>ポリシーの変更</h2>
+          <p>本ポリシーに変更が生じた場合、冒頭の日付を更新したうえで同URLに掲載いたします。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>お問い合わせ</h2>
-        <p>ご質問は <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a> までお気軽にどうぞ。</p>
+      <div class="section-label">お問い合わせ</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>お問い合わせ</h2>
+          <p>ご質問は <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a> までお気軽にどうぞ。</p>
+        </div>
       </div>
-
-      <footer>© 2026 五円記帳. All Rights Reserved.</footer>
     </div>
 
     <!-- Simplified Chinese -->
-    <div data-lang="zh-Hans">
-      <p class="app-name">五円記帳</p>
-      <h1>隐私政策</h1>
-      <p class="updated">最后更新：2026年6月16日</p>
-
-      <div class="section">
-        <h2>概述</h2>
-        <p>五円記帳 是一款 iOS 个人财务管理应用。您输入的所有数据仅存储在您的设备上。我们不会收集、传输或访问您的任何个人或财务信息。</p>
+    <div data-lang="zh-Hans" style="display:contents">
+      <div class="section-label">概述</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>概述</h2>
+          <p>五円記帳 是一款 iOS 个人财务管理应用。您输入的所有数据仅存储在您的设备上。我们不会收集、传输或访问您的任何个人或财务信息。</p>
+        </div>
       </div>
 
-      <hr class="divider" />
-
-      <div class="section">
-        <h2>我们收集的数据</h2>
-        <p>我们不收集任何数据。具体如下：</p>
-        <ul>
-          <li>交易记录（标题、金额、日期、备注）仅通过 Apple 的 SwiftData 框架存储在您的设备上。</li>
-          <li>任何数据都不会发送至服务器。</li>
-          <li>不包含任何分析、崩溃报告或广告 SDK。</li>
-          <li>无需注册账户或登录。</li>
-        </ul>
+      <div class="section-label">数据</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>我们收集的数据</h2>
+          <p>我们不收集任何数据。具体如下：</p>
+          <ul>
+            <li>交易记录（标题、金额、日期、备注）仅通过 Apple 的 SwiftData 框架存储在您的设备上。</li>
+            <li>任何数据都不会发送至服务器。</li>
+            <li>不包含任何分析、崩溃报告或广告 SDK。</li>
+            <li>无需注册账户或登录。</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Face ID 与生物识别验证</h2>
-        <p>如果您启用了应用锁定，五円記帳 将通过 Apple 的 LocalAuthentication 框架使用 Face ID 或 Touch ID。生物特征数据不会离开您的设备，我们也无法访问。</p>
+      <div class="section-label">安全</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Face ID 与生物识别验证</h2>
+          <p>如果您启用了应用锁定，五円記帳 将通过 Apple 的 LocalAuthentication 框架使用 Face ID 或 Touch ID。生物特征数据不会离开您的设备，我们也无法访问。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>第三方服务</h2>
-        <p>五円記帳 不集成任何第三方 SDK、分析服务、广告网络或云存储服务。</p>
+      <div class="section-label">第三方</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>第三方服务</h2>
+          <p>五円記帳 不集成任何第三方 SDK、分析服务、广告网络或云存储服务。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>数据删除</h2>
-        <p>所有数据均存储在您的设备上。如需删除，卸载应用即可。无需也无法通过我们进行任何操作。</p>
+      <div class="section-label">删除</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>数据删除</h2>
+          <p>所有数据均存储在您的设备上。如需删除，卸载应用即可。无需也无法通过我们进行任何操作。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>儿童隐私</h2>
-        <p>五円記帳 不收集任何用户的个人信息，包括 13 岁以下的儿童。</p>
+      <div class="section-label">儿童</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>儿童隐私</h2>
+          <p>五円記帳 不收集任何用户的个人信息，包括 13 岁以下的儿童。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>政策变更</h2>
-        <p>如本政策有所变更，更新版本将在此页面发布，并在顶部注明修订日期。</p>
+      <div class="section-label">变更</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>政策变更</h2>
+          <p>如本政策有所变更，更新版本将在此页面发布，并在顶部注明修订日期。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>联系我们</h2>
-        <p>如有疑问，请发送邮件至 <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>。</p>
+      <div class="section-label">联系</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>联系我们</h2>
+          <p>如有疑问，请发送邮件至 <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>。</p>
+        </div>
       </div>
-
-      <footer>© 2026 五円記帳. 保留所有权利。</footer>
     </div>
 
     <!-- Traditional Chinese -->
-    <div data-lang="zh-Hant">
-      <p class="app-name">五円記帳</p>
-      <h1>隱私權政策</h1>
-      <p class="updated">最後更新：2026年6月16日</p>
-
-      <div class="section">
-        <h2>概述</h2>
-        <p>五円記帳 是一款 iOS 個人財務管理應用程式。您輸入的所有資料僅儲存於您的裝置中。我們不會收集、傳輸或存取您的任何個人或財務資訊。</p>
+    <div data-lang="zh-Hant" style="display:contents">
+      <div class="section-label">概述</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>概述</h2>
+          <p>五円記帳 是一款 iOS 個人財務管理應用程式。您輸入的所有資料僅儲存於您的裝置中。我們不會收集、傳輸或存取您的任何個人或財務資訊。</p>
+        </div>
       </div>
 
-      <hr class="divider" />
-
-      <div class="section">
-        <h2>我們收集的資料</h2>
-        <p>我們不收集任何資料。具體如下：</p>
-        <ul>
-          <li>交易記錄（標題、金額、日期、備注）僅透過 Apple 的 SwiftData 框架儲存於您的裝置上。</li>
-          <li>任何資料都不會傳送至伺服器。</li>
-          <li>不包含任何分析、崩潰回報或廣告 SDK。</li>
-          <li>無需註冊帳戶或登入。</li>
-        </ul>
+      <div class="section-label">資料</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>我們收集的資料</h2>
+          <p>我們不收集任何資料。具體如下：</p>
+          <ul>
+            <li>交易記錄（標題、金額、日期、備注）僅透過 Apple 的 SwiftData 框架儲存於您的裝置上。</li>
+            <li>任何資料都不會傳送至伺服器。</li>
+            <li>不包含任何分析、崩潰回報或廣告 SDK。</li>
+            <li>無需註冊帳戶或登入。</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>Face ID 與生物辨識驗證</h2>
-        <p>若您啟用了應用程式鎖定，五円記帳 將透過 Apple 的 LocalAuthentication 框架使用 Face ID 或 Touch ID。生物特徵資料不會離開您的裝置，我們亦無法存取。</p>
+      <div class="section-label">安全</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>Face ID 與生物辨識驗證</h2>
+          <p>若您啟用了應用程式鎖定，五円記帳 將透過 Apple 的 LocalAuthentication 框架使用 Face ID 或 Touch ID。生物特徵資料不會離開您的裝置，我們亦無法存取。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>第三方服務</h2>
-        <p>五円記帳 不整合任何第三方 SDK、分析服務、廣告網路或雲端儲存服務。</p>
+      <div class="section-label">第三方</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>第三方服務</h2>
+          <p>五円記帳 不整合任何第三方 SDK、分析服務、廣告網路或雲端儲存服務。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>資料刪除</h2>
-        <p>所有資料均儲存於您的裝置上。如需刪除，解除安裝應用程式即可。無需也無法透過我們進行任何操作。</p>
+      <div class="section-label">刪除</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>資料刪除</h2>
+          <p>所有資料均儲存於您的裝置上。如需刪除，解除安裝應用程式即可。無需也無法透過我們進行任何操作。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>兒童隱私</h2>
-        <p>五円記帳 不收集任何使用者的個人資訊，包括 13 歲以下的兒童。</p>
+      <div class="section-label">兒童</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>兒童隱私</h2>
+          <p>五円記帳 不收集任何使用者的個人資訊，包括 13 歲以下的兒童。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>政策變更</h2>
-        <p>若本政策有所變更，更新版本將在此頁面發布，並於頂部註明修訂日期。</p>
+      <div class="section-label">變更</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>政策變更</h2>
+          <p>若本政策有所變更，更新版本將在此頁面發布，並於頂部註明修訂日期。</p>
+        </div>
       </div>
 
-      <div class="section">
-        <h2>聯絡我們</h2>
-        <p>如有疑問，請發送電子郵件至 <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>。</p>
+      <div class="section-label">聯絡</div>
+      <div class="section-body">
+        <div class="policy-section">
+          <h2>聯絡我們</h2>
+          <p>如有疑問，請發送電子郵件至 <a href="mailto:silverhandsome@gmail.com">silverhandsome@gmail.com</a>。</p>
+        </div>
       </div>
-
-      <footer>© 2026 五円記帳，版權所有。</footer>
     </div>
 
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div data-lang="en" class="visible">© 2026 Goen. All Rights Reserved.</div>
+    <div data-lang="ja">© 2026 五円記帳. All Rights Reserved.</div>
+    <div data-lang="zh-Hans">© 2026 五円記帳. 保留所有权利。</div>
+    <div data-lang="zh-Hant">© 2026 五円記帳，版權所有。</div>
+  </footer>
 
   <script>
+    const LABELS = { en: 'EN', ja: 'JA', 'zh-Hans': 'ZH', 'zh-Hant': 'ZH' };
+
     function setLang(lang) {
+      // Update all [data-lang] visibility
       document.querySelectorAll('[data-lang]').forEach(el => {
-        el.classList.toggle('visible', el.dataset.lang === lang);
+        const match = el.dataset.lang === lang;
+        el.classList.toggle('visible', match);
+        // grid items use display:contents — force it
+        if (el.style.display === 'contents' || el.dataset.lang) {
+          el.style.display = match ? 'contents' : 'none';
+        }
       });
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.target === lang);
+
+      // Hero and footer use block display
+      document.querySelectorAll('.page-hero [data-lang], .site-footer [data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? 'block' : 'none';
       });
+
+      document.getElementById('langLabel').textContent = LABELS[lang] || 'EN';
       document.documentElement.lang = lang;
+
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.langCode === lang);
+      });
+
+      closePicker();
     }
+
+    function togglePicker(e) {
+      e.stopPropagation();
+      document.getElementById('langPicker').classList.toggle('open');
+    }
+
+    function closePicker() {
+      document.getElementById('langPicker').classList.remove('open');
+    }
+
+    document.addEventListener('click', closePicker);
+    document.getElementById('langDropdown').addEventListener('click', e => e.stopPropagation());
 
     function detectLang() {
       const nav = navigator.language || 'en';
       if (nav.startsWith('ja')) return 'ja';
-      if (nav === 'zh-TW' || nav === 'zh-HK' || nav === 'zh-Hant') return 'zh-Hant';
+      if (nav === 'zh-TW' || nav === 'zh-HK' || nav.toLowerCase().includes('hant')) return 'zh-Hant';
       if (nav.startsWith('zh')) return 'zh-Hans';
       return 'en';
     }
